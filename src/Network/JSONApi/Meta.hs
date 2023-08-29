@@ -11,6 +11,7 @@ module Network.JSONApi.Meta
 
 import           Control.DeepSeq (NFData)
 import           Data.Aeson (ToJSON, FromJSON, Object, toJSON)
+import           Data.Aeson.KeyMap (fromHashMapText)
 import           Data.HashMap.Strict as HM
 import           Data.Text (Text)
 
@@ -71,4 +72,4 @@ Example usage:
 See MetaSpec.hs for an example
 -}
 mkMeta :: (MetaObject a) => a -> Meta
-mkMeta obj = Meta $ HM.singleton (typeName obj) (toJSON obj)
+mkMeta obj = Meta $ fromHashMapText $ HM.singleton (typeName obj) (toJSON obj)
